@@ -1,0 +1,25 @@
+package br.com.zup.edu
+
+import io.grpc.stub.StreamObserver
+import org.slf4j.LoggerFactory
+import javax.inject.Singleton
+import kotlin.random.Random
+
+@Singleton
+class FreteGrpcServer: FretesServiceGrpc.FretesServiceImplBase() {
+
+    private val logger = LoggerFactory.getLogger(FreteGrpcServer::class.java)
+
+    override fun cauculaFrete(request: CauculaFreteRequest?, responseObserver: StreamObserver<CauculaFreteResponse>?) {
+
+        logger.info("Calculando frete para request: $request")
+
+        val response = CauculaFreteResponse.newBuilder()
+            .setCep(request!!.cep)
+            .setValor(Random.nextDouble(from = 0.0, until = 140.0))
+            .build()
+        logger.info("Calculado frete para response: $response")
+        responseObserver!!.onNext(response)
+        responseObserver.onCompleted()
+    }
+}
