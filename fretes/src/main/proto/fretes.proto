@@ -9,6 +9,17 @@ package br.com.zup.edu;
 
 service FretesService {
   rpc send (FretesRequest) returns (FretesReply) {}
+
+  rpc cauculaFrete(CauculaFreteRequest) returns (CauculaFreteResponse) {}
+}
+
+message CauculaFreteRequest{
+  string  cep = 1;
+}
+
+message CauculaFreteResponse{
+  double valor = 1;
+  string cep = 2;
 }
 
 message FretesRequest {
