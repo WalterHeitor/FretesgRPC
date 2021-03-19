@@ -10,14 +10,19 @@ package br.com.zup.edu;
 service FretesService {
   rpc send (FretesRequest) returns (FretesReply) {}
 
-  rpc cauculaFrete(CauculaFreteRequest) returns (CauculaFreteResponse) {}
+  rpc calculaFrete(CalculaFreteRequest) returns (CalculaFreteResponse) {}
+}
+message ErrorDetails{
+  int32 code = 1;
+  string message = 2;
+
 }
 
-message CauculaFreteRequest{
+message CalculaFreteRequest{
   string  cep = 1;
 }
 
-message CauculaFreteResponse{
+message CalculaFreteResponse{
   double valor = 1;
   string cep = 2;
 }
